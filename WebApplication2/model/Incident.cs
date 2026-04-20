@@ -15,16 +15,16 @@ namespace WebApplication2.model
         [StringLength(200)]
         public string description { get; set; } = string.Empty;
         //Gravité (LOW, MEDIUM, HIGH,cRITICAL)
-        [Required] 
+        [Required]
+        [RegularExpression("LOW|MEDIUM|HIGH|CRITICAL", ErrorMessage = "Invalid severity")]
         public string severity { get; set; } = string.Empty;
         //État(OPEN, IN_PROGRESS,RESOLVED)
-        [Required] 
         public string status { get; set; } = string.Empty;
 
         //emails
-        [EmailAddress]
-        [DataType(dataType: DataType.EmailAddress)]
-        public string email { get; set; }
+        //[EmailAddress]
+        //[DataType(dataType: DataType.EmailAddress)]
+        //public string email { get; set; }
         //Date de création de l’incident
         [Required] 
         public  DateTime createdat { get; set; }

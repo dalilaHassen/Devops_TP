@@ -1,3 +1,4 @@
 <Solution>
+  <Project Path="IncidentApp/AppTests.csproj" Id="498870ea-e91a-4d7d-b8e4-437b342c370e" />
   <Project Path="WebApplication2/WebApplication2.csproj" />
 </Solution>

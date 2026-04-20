@@ -46,6 +46,7 @@ namespace WebApplication2.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutIncident(int id, Incident incident)
         {
+           
             if (id != incident.id)
             {
                 return BadRequest();
@@ -77,6 +78,10 @@ namespace WebApplication2.Controllers
         [HttpPost]
         public async Task<ActionResult<Incident>> PostIncident(Incident incident)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
             incident.status = "OPEN";
             incident.createdat = DateTime.Now;
             _context.Incidents.Add(incident);
@@ -138,8 +143,83 @@ namespace WebApplication2.Controllers
             return Ok(incidents);
         }
 
+        [HttpGet("status/async/{status}")]
+        public async Task<ActionResult<IEnumerable<Incident>>> FilterByStatusAsync(string status)
+        {
+            // Validation du statut
+            if (string.IsNullOrWhiteSpace(status))
+            {
+                return BadRequest("Le statut ne peut pas être vide");
+            }
+
+            // Convertir en majuscules pour la comparaison
+            string statusUpper = status.ToUpper();
+
+            // Vérifier si le statut est autorisé
+            if (!AllowedStatuses.Contains(statusUpper))
+            {
+                return BadRequest($"Statut non valide. Valeurs autorisées : {string.Join(", ", AllowedStatuses)}");
+            }
+
+            // Filtrage asynchrone
+            var incidents = await _context.Incidents
+                .Where(i => i.status.ToUpper() == statusUpper)
+                .ToListAsync();
+
+            if (!incidents.Any())
+            {
+                return NotFound($"Aucun incident trouvé avec le statut '{statusUpper}'");
+            }
+
+            return Ok(incidents);
+        }
+
+
+
+
+
+
+
+
+
+        [HttpGet("severity/async/{severity}")]
+        public async Task<IActionResult> FilterBySeverityAsync(string severity)  // Changed to IActionResult
+        {
+            // Validation de la sévérité
+            if (string.IsNullOrWhiteSpace(severity))
+            {
+                return BadRequest("La sévérité ne peut pas être vide");
+            }
+
+            // Convertir en majuscules pour la comparaison
+            string severityUpper = severity.ToUpper();
+
+            // Vérifier si la sévérité est autorisée
+            if (!AllowedSeverities.Contains(severityUpper))
+            {
+                return BadRequest($"Sévérité non valide. Valeurs autorisées : {string.Join(", ", AllowedSeverities)}");
+            }
+
+            // Filtrage asynchrone
+            var incidents = await _context.Incidents
+                .Where(i => i.severity.ToUpper() == severityUpper)
+                .ToListAsync();
+
+            if (!incidents.Any())
+            {
+                return NotFound($"Aucun incident trouvé avec la sévérité '{severityUpper}'");
+            }
+
+            return Ok(incidents);  // Now returns OkObjectResult
+        }
+
+
+
+
+
+
         private static readonly string[] AllowedSeverities = { "LOW", "MEDIUM", "HIGH", "CRITICAL" };
         private static readonly string[] AllowedStatuses = { "OPEN", "IN_PROGRESS", "RESOLVED" };
     }
-
 }
+
