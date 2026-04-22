@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "LCc/8Z66ANI=",
+  "dgSpecHash": "+BA54XP64FA=",
   "success": true,
   "projectFilePath": "C:\\Users\\hsend\\IncidentApi\\WebApplication2\\WebApplication2.csproj",
   "expectedPackageFiles": [
@@ -143,28 +143,13 @@
   ],
   "logs": [
     {
-      "code": "NU1901",
+      "code": "NU1900",
       "level": "Warning",
-      "message": "Le package 'NuGet.Packaging' 6.12.1 présente une vulnérabilité de gravité faible connue, https://github.com/advisories/GHSA-g4vj-cjjj-v7hg.",
+      "message": "Une erreur s’est produite lors de l’obtention des données de vulnérabilité du package\u00A0: Impossible de charger l'index de service pour la source https://api.nuget.org/v3/index.json.",
       "projectPath": "C:\\Users\\hsend\\IncidentApi\\WebApplication2\\WebApplication2.csproj",
       "warningLevel": 1,
       "filePath": "C:\\Users\\hsend\\IncidentApi\\WebApplication2\\WebApplication2.csproj",
-      "libraryId": "NuGet.Packaging",
-      "targetGraphs": [
-        "net10.0"
-      ]
-    },
-    {
-      "code": "NU1901",
-      "level": "Warning",
-      "message": "Le package 'NuGet.Protocol' 6.12.1 présente une vulnérabilité de gravité faible connue, https://github.com/advisories/GHSA-g4vj-cjjj-v7hg.",
-      "projectPath": "C:\\Users\\hsend\\IncidentApi\\WebApplication2\\WebApplication2.csproj",
-      "warningLevel": 1,
-      "filePath": "C:\\Users\\hsend\\IncidentApi\\WebApplication2\\WebApplication2.csproj",
-      "libraryId": "NuGet.Protocol",
-      "targetGraphs": [
-        "net10.0"
-      ]
+      "targetGraphs": []
     }
   ]
 }
