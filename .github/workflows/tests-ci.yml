@@ -7,7 +7,7 @@ on:
     branches: [ "main" ]
 
 jobs:
-  # # build-and-test:
+  build-and-test:
     runs-on: windows-latest
 
     steps:
@@ -19,8 +19,11 @@ jobs:
         with:
           dotnet-version: '8.0.x'
 
+      - name: Fix network
+        run: git config --global http.version HTTP/1.1
+
       - name: Restore dependencies
-        run: dotnet restore
+        run: dotnet restore --disable-parallel
 
       - name: Build project
         run: dotnet build --no-restore
