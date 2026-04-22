@@ -29,4 +29,12 @@ jobs:
         run: dotnet build --no-restore
 
       - name: Run tests
-        run: dotnet test --no-build --verbosity normal
+        run: dotnet test --no-build --verbosity normal --logger trx --results-directory TestResults
+
+      - name: Upload test report
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-report
+          path: TestResults/**/*.trx
+      - name: List test results
+        run: dir TestResults /s
