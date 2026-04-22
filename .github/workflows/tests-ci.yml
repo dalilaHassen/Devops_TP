@@ -36,5 +36,4 @@ jobs:
         with:
           name: test-report
           path: TestResults/**/*.trx
-      - name: List test results
-        run: dir TestResults /s
+     
