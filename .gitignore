@@ -27,3 +27,21 @@ bin/
 obj/
 *.user
 *.Development.json
+
+# ===== NOUVEAU =====
+# Terraform
+.terraform/
+.terraform.lock.hcl
+*.tfstate
+*.tfstate.*
+*.tfvars
+terraform.tfvars
+*.backup
+crash.log
+
+# Git LFS (si utilisé)
+*.exe
+
+# Docker
+Dockerfile
+.dockerignore
